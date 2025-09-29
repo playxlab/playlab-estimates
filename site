@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성과형 무가 캠페인 견적서</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f5f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 24px;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      gap: 40px;
+    }
+    .section {
+      flex: 1;
+    }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 20px;
+      color: #333;
+    }
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .quantity-control input {
+      width: 100px;
+      text-align: center;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .details {
+      font-size: 14px;
+      color: #555;
+      margin-top: 12px;
+    }
+    .price-box {
+      background: #f9fafc;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .price-box p {
+      margin: 8px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .total {
+      font-weight: bold;
+      color: #4a47ff;
+      font-size: 18px;
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      margin-top: 20px;
+      padding: 12px;
+      width: 100%;
+      background: #4a47ff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #3532d4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Service Configuration -->
+    <div class="section">
+      <h2>Service Configuration</h2>
+      <div class="quantity-control">
+        <label for="quantity">Service Quantity:</label>
+        <input type="number" id="quantity" min="100" max="1000" value="100" />
+      </div>
+      <div class="details">
+        <p>Base Price per Unit: ₩80,000</p>
+        <p>VAT Rate: 10%</p>
+        <ul>
+          <li>정밀 매칭: 데이터 기반 크리에이터 선정</li>
+          <li>AI 분석: 노출·반응·연출까지 정량화</li>
+          <li>성과 대시보드 제공</li>
+          <li>스마트 커뮤니케이션 & 자동화</li>
+          <li>넥스트 스텝 인사이트 발굴</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Price Estimate -->
+    <div class="section">
+      <h2>Price Estimate</h2>
+      <div class="price-box">
+        <p><span>Quantity</span><span id="display-qty">100</span></p>
+        <p><span>Subtotal</span><span id="subtotal">₩8,000,000</span></p>
+        <p><span>VAT (10%)</span><span id="vat">₩800,000</span></p>
+        <p class="total"><span>Total Amount</span><span id="total">₩8,800,000</span></p>
+      </div>
+      <button>대규모 시딩 프로모션 문의</button>
+    </div>
+  </div>
+
+  <script>
+    const qtyInput = document.getElementById("quantity");
+    const displayQty = document.getElementById("display-qty");
+    const subtotalEl = document.getElementById("subtotal");
+    const vatEl = document.getElementById("vat");
+    const totalEl = document.getElementById("total");
+
+    const unitPrice = 80000;
+    const vatRate = 0.1;
+
+    function formatKRW(amount) {
+      return "₩" + amount.toLocaleString();
+    }
+
+    function updatePrice() {
+      let qty = parseInt(qtyInput.value);
+      if (isNaN(qty) || qty < 100) qty = 100;
+      if (qty > 1000) qty = 1000;
+      qtyInput.value = qty;
+
+      const subtotal = qty * unitPrice;
+      const vat = Math.round(subtotal * vatRate);
+      const total = subtotal + vat;
+
+      displayQty.textContent = qty;
+      subtotalEl.textContent = formatKRW(subtotal);
+      vatEl.textContent = formatKRW(vat);
+      totalEl.textContent = formatKRW(total);
+    }
+
+    qtyInput.addEventListener("input", updatePrice);
+    updatePrice();
+  </script>
+</body>
+</html>
