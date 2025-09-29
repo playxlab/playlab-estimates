@@ -5,152 +5,241 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>성과형 무가 캠페인 견적서</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Arial', sans-serif;
-      background: #f5f7fb;
+      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .wrapper {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      padding: 40px;
+      max-width: 1000px;
+      width: 100%;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #f0f0f0;
+    }
+    .header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .header p {
+      font-size: 16px;
+      color: #666;
     }
     .container {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 24px;
-      max-width: 900px;
-      width: 100%;
       display: flex;
-      gap: 40px;
+      gap: 48px;
     }
     .section {
       flex: 1;
     }
     h2 {
-      margin-bottom: 20px;
-      font-size: 20px;
-      color: #333;
+      margin-bottom: 24px;
+      font-size: 22px;
+      font-weight: 600;
+      color: #2d3748;
     }
     .quantity-control {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
+    .quantity-control label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #4a5568;
+      margin-bottom: 12px;
     }
     .quantity-control input {
-      width: 100px;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 18px;
+      font-weight: 600;
       text-align: center;
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      transition: all 0.2s;
     }
-    .details {
+    .quantity-control input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    .info-box {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
       font-size: 14px;
-      color: #555;
-      margin-top: 12px;
+      line-height: 1.6;
+      color: #4a5568;
+    }
+    .info-box p {
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .info-box ul {
+      margin-left: 20px;
+      margin-top: 16px;
+    }
+    .info-box li {
+      margin-bottom: 8px;
+      color: #2d3748;
     }
     .price-box {
-      background: #f9fafc;
-      padding: 20px;
-      border-radius: 8px;
-      font-size: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 28px;
+      border-radius: 12px;
+      color: white;
+      margin-bottom: 20px;
     }
-    .price-box p {
-      margin: 8px 0;
+    .price-row {
       display: flex;
       justify-content: space-between;
+      margin-bottom: 16px;
+      font-size: 15px;
     }
-    .total {
-      font-weight: bold;
-      color: #4a47ff;
-      font-size: 18px;
-      margin-top: 12px;
-      display: flex;
-      justify-content: space-between;
+    .price-row.total {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      font-size: 20px;
+      font-weight: 700;
     }
     button {
-      margin-top: 20px;
-      padding: 12px;
       width: 100%;
-      background: #4a47ff;
+      padding: 16px;
+      background: #1a1a1a;
       color: #fff;
       border: none;
-      border-radius: 6px;
+      border-radius: 10px;
       font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
+      transition: all 0.3s;
     }
     button:hover {
-      background: #3532d4;
+      background: #333;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 32px;
+      }
+      .header h1 {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Service Configuration -->
-    <div class="section">
-      <h2>Service Configuration</h2>
-      <div class="quantity-control">
-        <label for="quantity">Service Quantity:</label>
-        <input type="number" id="quantity" min="100" max="1000" value="100" />
-      </div>
-      <div class="details">
-        <p>Base Price per Unit: ₩80,000</p>
-        <p>VAT Rate: 10%</p>
-        <ul>
-          <li>정밀 매칭: 데이터 기반 크리에이터 선정</li>
-          <li>AI 분석: 노출·반응·연출까지 정량화</li>
-          <li>성과 대시보드 제공</li>
-          <li>스마트 커뮤니케이션 & 자동화</li>
-          <li>넥스트 스텝 인사이트 발굴</li>
-        </ul>
-      </div>
+  <div class="wrapper">
+    <div class="header">
+      <h1>성과형 무가 캠페인 견적서</h1>
+      <p>데이터 기반 크리에이터 매칭 및 성과 분석 서비스</p>
     </div>
-
-    <!-- Price Estimate -->
-    <div class="section">
-      <h2>Price Estimate</h2>
-      <div class="price-box">
-        <p><span>Quantity</span><span id="display-qty">100</span></p>
-        <p><span>Subtotal</span><span id="subtotal">₩8,000,000</span></p>
-        <p><span>VAT (10%)</span><span id="vat">₩800,000</span></p>
-        <p class="total"><span>Total Amount</span><span id="total">₩8,800,000</span></p>
+    
+    <div class="container">
+      <!-- Service Configuration -->
+      <div class="section">
+        <h2>서비스 설정</h2>
+        
+        <div class="quantity-control">
+          <label for="quantity">서비스 수량</label>
+          <input type="number" id="quantity" min="100" max="1000" step="10" value="100" />
+        </div>
+        
+        <div class="info-box">
+          <p>기본 단가: ₩80,000 / 부가세율: 10%</p>
+          <ul>
+            <li>정밀 매칭: 데이터 기반 크리에이터 선정</li>
+            <li>AI 분석: 노출·반응·연출까지 정량화</li>
+            <li>성과 대시보드 제공</li>
+            <li>스마트 커뮤니케이션 & 자동화</li>
+            <li>넥스트 스텝 인사이트 발굴</li>
+          </ul>
+        </div>
       </div>
-      <button>대규모 시딩 프로모션 문의</button>
+      
+      <!-- Price Estimate -->
+      <div class="section">
+        <h2>견적 정보</h2>
+        
+        <div class="price-box">
+          <div class="price-row">
+            <span>수량</span>
+            <span id="display-qty">100</span>
+          </div>
+          <div class="price-row">
+            <span>소계</span>
+            <span id="subtotal">₩8,000,000</span>
+          </div>
+          <div class="price-row">
+            <span>부가세 (10%)</span>
+            <span id="vat">₩800,000</span>
+          </div>
+          <div class="price-row total">
+            <span>총 금액</span>
+            <span id="total">₩8,800,000</span>
+          </div>
+        </div>
+        
+        <button onclick="window.open('https://meet.brevo.com/team-playlab/-how-to-go-viral', '_blank')">
+          대규모 시딩 프로모션 문의
+        </button>
+      </div>
     </div>
   </div>
-
+  
   <script>
     const qtyInput = document.getElementById("quantity");
     const displayQty = document.getElementById("display-qty");
     const subtotalEl = document.getElementById("subtotal");
     const vatEl = document.getElementById("vat");
     const totalEl = document.getElementById("total");
-
     const unitPrice = 80000;
     const vatRate = 0.1;
-
+    
     function formatKRW(amount) {
       return "₩" + amount.toLocaleString();
     }
-
+    
     function updatePrice() {
       let qty = parseInt(qtyInput.value);
       if (isNaN(qty) || qty < 100) qty = 100;
       if (qty > 1000) qty = 1000;
       qtyInput.value = qty;
-
+      
       const subtotal = qty * unitPrice;
       const vat = Math.round(subtotal * vatRate);
       const total = subtotal + vat;
-
+      
       displayQty.textContent = qty;
       subtotalEl.textContent = formatKRW(subtotal);
       vatEl.textContent = formatKRW(vat);
       totalEl.textContent = formatKRW(total);
     }
-
+    
     qtyInput.addEventListener("input", updatePrice);
     updatePrice();
   </script>
